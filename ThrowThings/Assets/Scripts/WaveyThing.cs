@@ -3,53 +3,50 @@
 public class WaveyThing : MonoBehaviour
 {
     [SerializeField]
-    private bool is2d = true;
-
-    [SerializeField]
     private AnimationCurve curve;
 
     [SerializeField]
     private LineRenderer lineRenderer;
 
     [SerializeField]
-    private Transform @base;
+    private Transform bottom;
 
     [SerializeField]
-    private Transform top;
+    private Rigidbody2D top;
 
-    private Vector3 velocity;
+    private float height;
 
     private void Awake()
     {
+        height = top.position.y - bottom.position.y;
         Console.Initialize();
     }
 
     private void FixedUpdate()
     {
-        Vector3 origin = new Vector3(@base.position.x, top.position.y, @base.position.z);
-        Vector3 diff = origin - top.position;
-        velocity += diff * Time.fixedDeltaTime * 4f;
-        top.position += velocity;
-        top.position = Vector3.Lerp(top.position, origin, Time.fixedDeltaTime * 5f);
-        top.LookAt(@base.position, Vector3.left);
+        Vector2 origin = new Vector2(bottom.position.x, height);
+        Vector2 diff = origin - top.position;
+        top.velocity += diff * Time.fixedDeltaTime * top.mass * 3f;
+        top.position = Vector3.Lerp(top.position, origin, Time.fixedDeltaTime * top.mass * 0.12f);
 
+        top.angularVelocity = Mathf.Lerp(top.angularVelocity, 0f, Time.fixedDeltaTime * 1f);
+        Vector2 from = (top.position - (Vector2)bottom.position).normalized;
+        float angle = Mathf.Atan2(from.y, from.x) * Mathf.Rad2Deg - 90;
+        top.rotation = Mathf.Lerp(top.rotation, angle, Time.fixedDeltaTime * 6f);
+    }
+
+    private void Update()
+    {
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
             float t = Mathf.Clamp01(i / (lineRenderer.positionCount - 1f));
-            Vector3 position = Vector3.LerpUnclamped(@base.position, top.position, t);
+            Vector3 position = Vector3.LerpUnclamped(bottom.position, top.position, t);
 
             t = curve.Evaluate(t);
-            position.x *= t;
-            position.z *= t;
-
-            if (is2d)
-            {
-                lineRenderer.SetPosition(i, (Vector2)position);
-            }
-            else
-            {
-                lineRenderer.SetPosition(i, position);
-            }
+            Vector3 lastPosition = lineRenderer.GetPosition(i);
+            position = Vector3.Lerp(new Vector3(bottom.position.x, position.y, bottom.position.z), position, t);
+            position = Vector3.Lerp(lastPosition, position, 0.5f);
+            lineRenderer.SetPosition(i, position);
         }
     }
 }
