@@ -3,6 +3,9 @@
 public class WaveyThing : MonoBehaviour
 {
     [SerializeField]
+    private bool is2d = true;
+
+    [SerializeField]
     private AnimationCurve curve;
 
     [SerializeField]
@@ -39,7 +42,14 @@ public class WaveyThing : MonoBehaviour
             position.x *= t;
             position.z *= t;
 
-            lineRenderer.SetPosition(i, position);
+            if (is2d)
+            {
+                lineRenderer.SetPosition(i, (Vector2)position);
+            }
+            else
+            {
+                lineRenderer.SetPosition(i, position);
+            }
         }
     }
 }
