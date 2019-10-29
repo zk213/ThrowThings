@@ -42,6 +42,11 @@ public class WaveyThing : MonoBehaviour
             instance = FindObjectOfType<WaveyThing>();
         }
 
+        if (!instance)
+        {
+            return false;
+        }
+
         Bounds bounds = new Bounds(instance.top.position, instance.top.transform.localScale);
         bounds.Expand(2f);
 

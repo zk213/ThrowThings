@@ -8,6 +8,9 @@ public class Holder : MonoBehaviour
     [SerializeField]
     private string placeButton = "";
 
+    [SerializeField]
+    private bool places = true;
+
     private float lastHoldTime;
     private Grabbable holdingObject;
     private PhysicsMaterial2D physicsMat;
@@ -15,6 +18,9 @@ public class Holder : MonoBehaviour
     private void Awake()
     {
         physicsMat = GetComponentInChildren<Collider2D>().sharedMaterial;
+
+        AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
+        attackPlayer.enabled = false;
     }
 
     private void Update()
@@ -30,10 +36,26 @@ public class Holder : MonoBehaviour
 
             if (!string.IsNullOrEmpty(placeButton) && Input.GetKeyDown(placeButton))
             {
-                //check if near the platform
-                if (WaveyThing.CloseEnoughToPlatform(transform.position))
+                if (places)
                 {
-                    Place();
+                    //check if near the platform
+                    if (WaveyThing.CloseEnoughToPlatform(transform.position))
+                    {
+                        Place();
+                    }
+                }
+                else
+                {
+                    holdingObject.GetComponent<Collider2D>().enabled = false;
+                    AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
+                    attackPlayer.bullet = holdingObject.gameObject;
+                    attackPlayer.enabled = true;
+                    attackPlayer.bullet.transform.SetParent(attackPlayer.target);
+                    attackPlayer.bullet.transform.localPosition = Vector2.zero;
+
+                    enabled = false;
+                    GetComponent<Movement>().enabled = false;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
             }
         }
