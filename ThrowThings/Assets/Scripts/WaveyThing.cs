@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[ExecuteAlways]
 public class WaveyThing : MonoBehaviour
 {
     [SerializeField]
@@ -27,6 +28,11 @@ public class WaveyThing : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!Application.isPlaying)
+        {
+            return;
+        }
+
         Vector2 origin = new Vector2(bottom.position.x, bottom.position.y);
         float angle = -((balance * 20f) + 90f) + 180f;
         Vector2 circle = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * height;
@@ -42,7 +48,7 @@ public class WaveyThing : MonoBehaviour
         top.rotation = Mathf.Lerp(top.rotation, angle, Time.fixedDeltaTime * 6f);
     }
 
-    private void Update()
+    private void OnRenderObject()
     {
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
