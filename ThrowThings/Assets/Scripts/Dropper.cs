@@ -4,18 +4,35 @@ using UnityEngine;
 
 public class Dropper : MonoBehaviour
 {
-    new GameObject[] Balls;
+    new GameObject[] Instant;
     int i = -1;
 
+    new GameObject[] Possible;
+
     [SerializeField]
-    private GameObject Ball;
+    private GameObject Obj1;
+
+    [SerializeField]
+    private GameObject Obj2;
+
+    [SerializeField]
+    private GameObject Obj3;
+
+    [SerializeField]
+    private GameObject Obj4;
 
     float timer = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Balls = new GameObject[5];  
+        Instant = new GameObject[5];
+        Possible = new GameObject[4];
+
+        Possible[0] = Obj1;
+        Possible[1] = Obj2;
+        Possible[2] = Obj3;
+        Possible[3] = Obj4;
     }
 
     // Update is called once per frame
@@ -33,12 +50,12 @@ public class Dropper : MonoBehaviour
             }
 
             // if Balls[i] is not null, destroy Balls[i]
-            if(Balls[i] != null)
+            if(Instant[i] != null)
             {
-                Destroy(Balls[i]);
+                Destroy(Instant[i]);
             }
 
-            Balls[i] = Instantiate(Ball, gameObject.transform.position, Quaternion.identity);
+            Instant[i] = Instantiate(Possible[Random.Range(0,3)], new Vector3(Random.Range(-5.5f, 5.5f),10,0), Quaternion.identity);
         }
     }
 }
