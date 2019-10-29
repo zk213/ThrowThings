@@ -14,6 +14,9 @@ public class WaveyThing : MonoBehaviour
     [SerializeField]
     private Rigidbody2D top;
 
+    [SerializeField, Range(-1f, 1f)]
+    private float balance = 0f;
+
     private float height;
 
     private void Awake()
@@ -24,14 +27,18 @@ public class WaveyThing : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 origin = new Vector2(bottom.position.x, height);
+        Vector2 origin = new Vector2(bottom.position.x, bottom.position.y);
+        float angle = -((balance * 20f) + 90f) + 180f;
+        Vector2 circle = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * height;
+        origin += circle;
+
         Vector2 diff = origin - top.position;
         top.velocity += diff * Time.fixedDeltaTime * top.mass * 3f;
         top.position = Vector3.Lerp(top.position, origin, Time.fixedDeltaTime * top.mass * 0.12f);
 
         top.angularVelocity = Mathf.Lerp(top.angularVelocity, 0f, Time.fixedDeltaTime * 1f);
-        Vector2 from = (top.position - (Vector2)bottom.position).normalized;
-        float angle = Mathf.Atan2(from.y, from.x) * Mathf.Rad2Deg - 90;
+        Vector2 from = (lineRenderer.GetPosition(lineRenderer.positionCount - 1) - lineRenderer.GetPosition(lineRenderer.positionCount - 2)).normalized;
+        angle = Mathf.Atan2(from.y, from.x) * Mathf.Rad2Deg - 90;
         top.rotation = Mathf.Lerp(top.rotation, angle, Time.fixedDeltaTime * 6f);
     }
 
