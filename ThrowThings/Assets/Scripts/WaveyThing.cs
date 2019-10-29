@@ -48,7 +48,7 @@ public class WaveyThing : MonoBehaviour
         top.rotation = Mathf.Lerp(top.rotation, angle, Time.fixedDeltaTime * 6f);
     }
 
-    private void OnRenderObject()
+    private void Update()
     {
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
