@@ -11,6 +11,9 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float gravity = 20f;
 
+    [SerializeField]
+    private string horizontalInput = "Horizontal1";
+
     private Rigidbody2D rb;
 
     private void Awake()
@@ -21,7 +24,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float direction = Input.GetAxisRaw("Horizontal");
+        float direction = Input.GetAxisRaw(horizontalInput);
         Vector2 velocity = rb.velocity;
         velocity.x = Mathf.Lerp(velocity.x, direction * speed, Time.fixedDeltaTime * accel);
         rb.velocity = velocity;
