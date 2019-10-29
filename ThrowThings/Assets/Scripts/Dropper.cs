@@ -10,6 +10,8 @@ public class Dropper : MonoBehaviour
     [SerializeField]
     private GameObject Ball;
 
+    float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +21,11 @@ public class Dropper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // i increases each time. When it reaches 5, it resets to 0.
+        timer += Time.deltaTime;
 
-        // Check the array's position before instantiating, if it is not null, delete the object.
-        if (Input.GetKeyDown("space"))
+        if (timer >= 10)
         {
+            timer = 0;
             i++;
             if(i >= 5)
             {
