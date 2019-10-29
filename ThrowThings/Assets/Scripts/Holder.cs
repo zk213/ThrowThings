@@ -5,6 +5,10 @@ public class Holder : MonoBehaviour
     [SerializeField]
     private string pressButton = "";
 
+    [SerializeField]
+    private string placeButton = "";
+
+    private float lastHoldTime;
     private Grabbable holdingObject;
     private PhysicsMaterial2D physicsMat;
 
@@ -15,10 +19,30 @@ public class Holder : MonoBehaviour
 
     private void Update()
     {
-        if (holdingObject && !Input.GetKey(pressButton))
+        if (holdingObject)
         {
-            Drop();
+            lastHoldTime = Time.time;
+
+            if (Input.GetKeyDown(pressButton))
+            {
+                Drop();
+            }
+
+            if (!string.IsNullOrEmpty(placeButton) && Input.GetKeyDown(placeButton))
+            {
+                //check if near the platform
+                if (WaveyThing.CloseEnoughToPlatform(transform.position))
+                {
+                    Place();
+                }
+            }
         }
+    }
+
+    private void Place()
+    {
+        holdingObject.transform.SetParent(WaveyThing.Transform);
+        holdingObject = null;
     }
 
     private void Drop()
@@ -35,7 +59,7 @@ public class Holder : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(pressButton))
+        if (Time.time > lastHoldTime + 0.5f && Input.GetKey(pressButton))
         {
             for (int i = 0; i < collision.contactCount; i++)
             {

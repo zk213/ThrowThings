@@ -54,8 +54,11 @@ public class Grabbable : MonoBehaviour
 
     public void RemoveRigidbody()
     {
-        oldMass = Rigidbody.mass;
-        oldInterp = Rigidbody.interpolation;
+        if (Rigidbody)
+        {
+            oldMass = Rigidbody.mass;
+            oldInterp = Rigidbody.interpolation;
+        }
 
         Destroy(Rigidbody);
     }

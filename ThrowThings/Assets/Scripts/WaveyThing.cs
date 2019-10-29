@@ -3,6 +3,8 @@
 [ExecuteAlways]
 public class WaveyThing : MonoBehaviour
 {
+    private static WaveyThing instance;
+
     [SerializeField]
     private AnimationCurve curve;
 
@@ -20,10 +22,41 @@ public class WaveyThing : MonoBehaviour
 
     private float height;
 
+    public static Transform Transform
+    {
+        get
+        {
+            if (!instance)
+            {
+                instance = FindObjectOfType<WaveyThing>();
+            }
+
+            return instance.top.transform;
+        }
+    }
+
+    public static bool CloseEnoughToPlatform(Vector2 position)
+    {
+        if (!instance)
+        {
+            instance = FindObjectOfType<WaveyThing>();
+        }
+
+        Bounds bounds = new Bounds(instance.top.position, instance.top.transform.localScale);
+        bounds.Expand(2f);
+
+        return bounds.Contains(position);
+    }
+
     private void Awake()
     {
         height = top.position.y - bottom.position.y;
         Console.Initialize();
+    }
+
+    private void OnEnable()
+    {
+        instance = this;
     }
 
     private void FixedUpdate()

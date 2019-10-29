@@ -490,7 +490,9 @@ MonoBehaviour:
   speed: 5
   gravity: 20
   horizontalInput: Horizontal1
+  verticalInput: Vertical1
   allowKeyboard: 1
+  jumpHeight: 4
 --- !u!1 &6314331717207170467
 GameObject:
   m_ObjectHideFlags: 0
