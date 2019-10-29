@@ -56,6 +56,7 @@ public class Holder : MonoBehaviour
                     enabled = false;
                     GetComponent<Movement>().enabled = false;
                     GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    holdingObject = null;
                 }
             }
         }
