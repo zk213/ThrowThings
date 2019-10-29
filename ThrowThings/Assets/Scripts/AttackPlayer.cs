@@ -77,7 +77,7 @@ public class AttackPlayer : MonoBehaviour
         if (Input.GetButton(Fire))
         {
 
-            accelerationBarFill.GetComponent<Image>().fillAmount += 0.1f;
+            accelerationBarFill.GetComponent<Image>().fillAmount = Mathf.PingPong(Time.time, 1f);
 
 
         }
