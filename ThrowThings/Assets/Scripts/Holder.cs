@@ -32,7 +32,7 @@ public class Holder : MonoBehaviour
     {
         if (holdingObject)
         {
-       
+
 
             lastHoldTime = Time.time;
 
@@ -57,7 +57,12 @@ public class Holder : MonoBehaviour
                 }
                 else
                 {
-                    holdingObject.GetComponent<Collider2D>().enabled = false;
+                    Collider2D collider = holdingObject.GetComponent<Collider2D>();
+                    if (collider)
+                    {
+                        collider.enabled = false;
+                    }
+
                     AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
                     attackPlayer.bullet = holdingObject.gameObject;
                     attackPlayer.enabled = true;
