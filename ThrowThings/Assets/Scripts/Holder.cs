@@ -20,7 +20,10 @@ public class Holder : MonoBehaviour
         physicsMat = GetComponentInChildren<Collider2D>().sharedMaterial;
 
         AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
-        attackPlayer.enabled = false;
+        if (attackPlayer)
+        {
+            attackPlayer.enabled = false;
+        }
     }
 
     private void Update()
