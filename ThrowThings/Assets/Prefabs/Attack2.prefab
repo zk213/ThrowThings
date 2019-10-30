@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 915260845024134296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.18, y: -3.36, z: 0}
-  m_LocalScale: {x: 1.132, y: 2.408, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 915260845607213140}
   m_Father: {fileID: 0}
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressButton: joystick 2 button 0
   placeButton: joystick 2 button 2
+  places: 1
 --- !u!1 &915260845607213143
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 915260845607213143}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.37367493, y: 0.17562293, z: 0.423}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 915260845024134300}
   m_RootOrder: 0
