@@ -31,7 +31,7 @@ public class AttackPlayer : MonoBehaviour
     public GameObject accelerationBarFill;
 
 
-   
+
     public GameObject bullet;
     public GameObject newBullet;
     public Transform target;
@@ -39,18 +39,18 @@ public class AttackPlayer : MonoBehaviour
     public GameObject player;
 
 
-  
+
 
     Rigidbody2D rigidbody2DComponent;
 
 
 
-    float UpAndDown ;
+    float UpAndDown;
     float LeftAndRight;
 
     private void Start()
     {
-        
+
         target.transform.position = this.transform.position;
     }
 
@@ -95,12 +95,12 @@ public class AttackPlayer : MonoBehaviour
 
 
 
-       
+
 
         target.transform.position = (Vector2)transform.position + new Vector2(LeftAndRight, UpAndDown).normalized * 1.5f;
 
 
-      
+
 
 
 
@@ -108,8 +108,13 @@ public class AttackPlayer : MonoBehaviour
 
     void FireBullet(float force)
     {
+
+
+        Vector2 foreceDirection = new Vector2(LeftAndRight, UpAndDown).normalized;
+        bool shouldIgnore = Vector2.Angle(Vector2.down, foreceDirection) < 90;
+        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>(), shouldIgnore);
         bullet.GetComponent<Collider2D>().enabled = true;
-        Vector2 foreceDirection = new Vector2(LeftAndRight, UpAndDown);
+
 
         bullet.GetComponent<Grabbable>().RestoreRigidbody();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -118,6 +123,8 @@ public class AttackPlayer : MonoBehaviour
         GetComponent<Holder>().enabled = true;
         bullet.transform.SetParent(null);
         enabled = false;
+
+
     }
 
 
