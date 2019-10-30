@@ -33,7 +33,15 @@ public class Dropper : MonoBehaviour
             // if Balls[i] is not null, destroy Balls[i]
             if(Instant[i] != null)
             {
-                Destroy(Instant[i]);
+                //if instant at i has been stuck, remove it from here
+                if (Instant[i].transform.parent != null)
+                {
+                    Instant[i] = null;
+                }
+                else
+                {
+                    Destroy(Instant[i]);
+                }
             }
 
             Instant[i] = Instantiate(Objs[Random.Range(0,3)], new Vector3(Random.Range(-5.5f, 5.5f),10,0), Quaternion.identity);
