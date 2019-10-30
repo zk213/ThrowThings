@@ -77,6 +77,16 @@ public class Movement : MonoBehaviour
             //rb.position = startPosition;
             //rb.velocity = Vector2.zero;
         }
+
+        //If velocity is over a small number, update "Moving"
+        if(Mathf.Abs(rb.velocity.x) >= 0.5)
+        {
+            GetComponent<Animator>().SetBool("Moving", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Moving", false);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

@@ -32,6 +32,8 @@ public class Holder : MonoBehaviour
     {
         if (holdingObject)
         {
+       
+
             lastHoldTime = Time.time;
 
             if (Input.GetKeyDown(pressButton))
@@ -90,6 +92,7 @@ public class Holder : MonoBehaviour
     {
         thing.Attach(holdingObject.gameObject);
         holdingObject = null;
+        gameObject.GetComponent<Animator>().SetBool("Holding", false);
     }
 
     private void Drop()
@@ -97,6 +100,7 @@ public class Holder : MonoBehaviour
         holdingObject.transform.SetParent(null);
         holdingObject.RestoreRigidbody();
         holdingObject = null;
+        gameObject.GetComponent<Animator>().SetBool("Holding", false);
     }
 
     private void Grab(Grabbable grabbable)
@@ -110,5 +114,6 @@ public class Holder : MonoBehaviour
         {
             colliders[i].sharedMaterial = physicsMat;
         }
+        gameObject.GetComponent<Animator>().SetBool("Holding", true);
     }
 }
