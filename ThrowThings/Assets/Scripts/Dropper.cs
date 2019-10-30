@@ -22,7 +22,7 @@ public class Dropper : MonoBehaviour
     private GameObject Obj4;
 
     float timer = 0;
-
+    float MaxTimer = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +40,10 @@ public class Dropper : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 10)
+        if (timer >= MaxTimer)
         {
+            MaxTimer = Random.Range(3,5);
+
             timer = 0;
             i++;
             if(i >= 5)
