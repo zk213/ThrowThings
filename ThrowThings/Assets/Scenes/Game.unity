@@ -575,6 +575,11 @@ PrefabInstance:
       propertyPath: HorizontalInput
       value: Horizontal3
       objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134297, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: FireKey
+      value: joystick 1 button 3
+      objectReference: {fileID: 0}
     - target: {fileID: 915260845024134290, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
       propertyPath: horizontalInput
@@ -1074,6 +1079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: HorizontalInput
       value: Horizontal4
+      objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134297, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: FireKey
+      value: joystick 2 button 3
       objectReference: {fileID: 0}
     - target: {fileID: 915260845024134290, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}

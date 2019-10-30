@@ -22,11 +22,10 @@ public class AttackPlayer : MonoBehaviour
     private string VerticalInput;
     [SerializeField]
 
-    private string Fire;
-    [SerializeField]
 
     private string HorizontalInput;
-
+    [SerializeField]
+    private string FireKey = "";
 
     public GameObject accelerationBarFill;
 
@@ -41,7 +40,6 @@ public class AttackPlayer : MonoBehaviour
 
 
 
-    Rigidbody2D rigidbody2DComponent;
 
 
 
@@ -58,7 +56,6 @@ public class AttackPlayer : MonoBehaviour
 
     void Awake()
     {
-        rigidbody2DComponent = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -74,14 +71,14 @@ public class AttackPlayer : MonoBehaviour
     {
 
 
-        if (Input.GetButton(Fire))
+        if (Input.GetKey(FireKey))
         {
 
             accelerationBarFill.GetComponent<Image>().fillAmount = Mathf.PingPong(Time.time, 1f);
 
 
         }
-        if (Input.GetButtonUp(Fire))
+        if (Input.GetKeyUp(FireKey))
         {
             float force = accelerationBarFill.GetComponent<Image>().fillAmount;
             force *= 800;
