@@ -14,9 +14,11 @@ public class Holder : MonoBehaviour
     private float lastHoldTime;
     private Grabbable holdingObject;
     private PhysicsMaterial2D physicsMat;
+    private WaveyThing[] things = { };
 
     private void Awake()
     {
+        things = FindObjectsOfType<WaveyThing>();
         physicsMat = GetComponentInChildren<Collider2D>().sharedMaterial;
 
         AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
@@ -42,9 +44,13 @@ public class Holder : MonoBehaviour
                 if (places)
                 {
                     //check if near the platform
-                    if (WaveyThing.CloseEnoughToPlatform(transform.position))
+                    for (int i = 0; i < things.Length; i++)
                     {
-                        Place();
+                        if (things[i].CloseEnoughToPlatform(holdingObject))
+                        {
+                            Place(things[i]);
+                            break;
+                        }
                     }
                 }
                 else
@@ -63,11 +69,26 @@ public class Holder : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (Input.GetKey(pressButton) && Time.time > lastHoldTime + 0.5f)
+            {
+                for (int i = 0; i < Grabbable.Grabbables.Count; i++)
+                {
+                    Grabbable grab = Grabbable.Grabbables[i];
+                    if (grab.IsCloseEnough(transform.position))
+                    {
+                        Grab(grab);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
-    private void Place()
+    private void Place(WaveyThing thing)
     {
-        holdingObject.transform.SetParent(WaveyThing.Transform);
+        thing.Attach(holdingObject.gameObject);
         holdingObject = null;
     }
 
@@ -76,27 +97,6 @@ public class Holder : MonoBehaviour
         holdingObject.transform.SetParent(null);
         holdingObject.RestoreRigidbody();
         holdingObject = null;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (holdingObject)
-        {
-            return;
-        }
-
-        if (Time.time > lastHoldTime + 0.5f && Input.GetKey(pressButton))
-        {
-            for (int i = 0; i < collision.contactCount; i++)
-            {
-                ContactPoint2D contact = collision.GetContact(i);
-                if (Grabbable.TryGet(contact.collider.transform, out Grabbable grabbable))
-                {
-                    Grab(grabbable);
-                    return;
-                }
-            }
-        }
     }
 
     private void Grab(Grabbable grabbable)

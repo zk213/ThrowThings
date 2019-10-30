@@ -26,11 +26,13 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private bool grounded;
     private float nextUnground;
+    private Vector2 startPosition;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
+        startPosition = rb.position;
     }
 
     private void FixedUpdate()
@@ -69,22 +71,28 @@ public class Movement : MonoBehaviour
         {
             grounded = false;
         }
+
+        if (transform.position.sqrMagnitude >= 20 * 20f)
+        {
+            rb.position = startPosition;
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.rigidbody)
-        {
-            //rb.MovePosition(rb.position + collision.rigidbody.velocity * Time.fixedDeltaTime);
-            rb.velocity += collision.rigidbody.velocity * 0.15f;
-        }
-
         for (int i = 0; i < collision.contactCount; i++)
         {
             if (Vector2.Angle(collision.GetContact(i).normal, Vector2.up) < 60f)
             {
                 grounded = true;
                 nextUnground = Time.time + 0.15f;
+
+                if (collision.GetContact(i).rigidbody)
+                {
+                    //rb.MovePosition(rb.position + collision.rigidbody.velocity * Time.fixedDeltaTime);
+                    rb.velocity += collision.GetContact(i).rigidbody.velocity * 0.1f;
+                }
             }
         }
     }

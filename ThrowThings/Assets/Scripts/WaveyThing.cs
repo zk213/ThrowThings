@@ -3,8 +3,6 @@
 [ExecuteAlways]
 public class WaveyThing : MonoBehaviour
 {
-    private static WaveyThing instance;
-
     [SerializeField]
     private AnimationCurve curve;
 
@@ -22,35 +20,37 @@ public class WaveyThing : MonoBehaviour
 
     private float height;
 
-    public static Transform Transform
-    {
-        get
-        {
-            if (!instance)
-            {
-                instance = FindObjectOfType<WaveyThing>();
-            }
+    public Collider2D[] Colliders { get; private set; } = { };
 
-            return instance.top.transform;
+    public bool CloseEnoughToPlatform(Grabbable grab)
+    {
+        Bounds otherBounds = grab.Collider.bounds;
+        otherBounds.center = new Vector3(otherBounds.center.x, otherBounds.center.y, 0f);
+
+        for (int i = 0; i < Colliders.Length; i++)
+        {
+            Bounds bounds = Colliders[i].bounds;
+            bounds.center = new Vector3(bounds.center.x, bounds.center.y, 0f);
+            bounds.Expand(0.15f);
+
+            if (bounds.Intersects(otherBounds))
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 
-    public static bool CloseEnoughToPlatform(Vector2 position)
+    public void Attach(GameObject grab)
     {
-        if (!instance)
+        Rigidbody2D rb = grab.GetComponent<Rigidbody2D>();
+        if (rb)
         {
-            instance = FindObjectOfType<WaveyThing>();
+            Destroy(rb);
         }
 
-        if (!instance)
-        {
-            return false;
-        }
-
-        Bounds bounds = new Bounds(instance.top.position, instance.top.transform.localScale);
-        bounds.Expand(2f);
-
-        return bounds.Contains(position);
+        grab.transform.SetParent(top.transform);
     }
 
     private void Awake()
@@ -59,17 +59,23 @@ public class WaveyThing : MonoBehaviour
         Console.Initialize();
     }
 
-    private void OnEnable()
-    {
-        instance = this;
-    }
-
     private void FixedUpdate()
     {
         if (!Application.isPlaying)
         {
             return;
         }
+
+        Colliders = top.GetComponentsInChildren<Collider2D>();
+        balance = 0f;
+        for (int i = 0; i < Colliders.Length; i++)
+        {
+            balance += Colliders[i].transform.position.x;
+        }
+
+        balance /= Colliders.Length;
+        balance *= 0.2f;
+        balance = Mathf.Clamp(balance, -1f, 1f);
 
         Vector2 origin = new Vector2(bottom.position.x, bottom.position.y);
         float angle = -((balance * 20f) + 90f) + 180f;

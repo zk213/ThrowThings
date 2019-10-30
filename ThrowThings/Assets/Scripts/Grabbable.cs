@@ -10,10 +10,12 @@ public class Grabbable : MonoBehaviour
     public static List<Grabbable> Grabbables { get; set; } = new List<Grabbable>();
 
     public Rigidbody2D Rigidbody { get; private set; }
+    public Collider2D Collider { get; private set; }
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+        Collider = GetComponentInChildren<Collider2D>();
     }
 
     private void OnEnable()
@@ -61,5 +63,13 @@ public class Grabbable : MonoBehaviour
         }
 
         Destroy(Rigidbody);
+    }
+
+    public bool IsCloseEnough(Vector2 position)
+    {
+        Bounds bounds = Collider.bounds;
+        bounds.center = new Vector3(bounds.center.x, bounds.center.y, 0f);
+        bounds.Expand(1.1f);
+        return bounds.Contains(position);
     }
 }
