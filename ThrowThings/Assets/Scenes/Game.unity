@@ -555,6 +555,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.9747988
+      objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 915260845024134297, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
       propertyPath: accelerationBarFill
@@ -578,7 +593,7 @@ PrefabInstance:
     - target: {fileID: 915260845024134297, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
       propertyPath: FireKey
-      value: joystick 1 button 3
+      value: joystick 1 button 2
       objectReference: {fileID: 0}
     - target: {fileID: 915260845024134290, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
@@ -600,19 +615,9 @@ PrefabInstance:
       propertyPath: placeButton
       value: joystick 1 button 2
       objectReference: {fileID: 0}
-    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+    - target: {fileID: 1760583016916721821, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
-      propertyPath: m_Color.r
-      value: 0.9747988
-      objectReference: {fileID: 0}
-    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
-        type: 3}
-      propertyPath: m_Color.b
+      propertyPath: places
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1065,6 +1070,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.35936022
+      objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 915260845024134297, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
       propertyPath: accelerationBarFill
@@ -1083,7 +1103,7 @@ PrefabInstance:
     - target: {fileID: 915260845024134297, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
       propertyPath: FireKey
-      value: joystick 2 button 3
+      value: joystick 2 button 2
       objectReference: {fileID: 0}
     - target: {fileID: 915260845024134290, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
@@ -1095,19 +1115,9 @@ PrefabInstance:
       propertyPath: verticalInput
       value: Vertical4
       objectReference: {fileID: 0}
-    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
+    - target: {fileID: 1760583016916721821, guid: 56cda223133b01b4ba404a8edfb89ebb,
         type: 3}
-      propertyPath: m_Color.r
-      value: 0.35936022
-      objectReference: {fileID: 0}
-    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 915260845024134303, guid: 56cda223133b01b4ba404a8edfb89ebb,
-        type: 3}
-      propertyPath: m_Color.b
+      propertyPath: places
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1432,6 +1442,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Positions.Array.data[15].x
       value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
+      propertyPath: horizontalInput
+      value: Horizontal2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
+      propertyPath: verticalInput
+      value: Vertical2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
@@ -2028,11 +2046,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573866964993530963, guid: d874c7189218b2e4884ed5cfefa64541,
-        type: 3}
-      propertyPath: m_Name
-      value: Bar1
-      objectReference: {fileID: 0}
     - target: {fileID: 5573866964993530972, guid: d874c7189218b2e4884ed5cfefa64541,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2047,6 +2060,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 332.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573866964993530963, guid: d874c7189218b2e4884ed5cfefa64541,
+        type: 3}
+      propertyPath: m_Name
+      value: Bar1
       objectReference: {fileID: 0}
     - target: {fileID: 5573866966106128103, guid: d874c7189218b2e4884ed5cfefa64541,
         type: 3}

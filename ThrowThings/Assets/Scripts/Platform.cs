@@ -58,8 +58,8 @@ public class Platform : MonoBehaviour
             timeAlive += Time.deltaTime;
             if (timeAlive > aliveTime - 1f)
             {
-                float t = Time.time * 24f;
-                root.localPosition = new Vector3(Mathf.PerlinNoise(t, 0f), 0f) * 0.1f;
+                float t = Time.time * 30f;
+                root.localPosition = new Vector3(Mathf.PerlinNoise(t, 0f), 0f) * 0.25f;
             }
 
             if (timeAlive > aliveTime)
