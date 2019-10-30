@@ -58,6 +58,7 @@ public class Dropper : MonoBehaviour
             }
 
             Instant[i] = Instantiate(Possible[Random.Range(0,3)], new Vector3(Random.Range(-5.5f, 5.5f),10,0), Quaternion.identity);
+            Instant[i].transform.localScale += new Vector3(Random.Range(0.7f, 1.3f), Random.Range(0.7f, 1.3f), 1);
         }
     }
 }
