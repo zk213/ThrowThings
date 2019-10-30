@@ -74,8 +74,8 @@ public class Movement : MonoBehaviour
 
         if (transform.position.sqrMagnitude >= 20 * 20f)
         {
-            rb.position = startPosition;
-            rb.velocity = Vector2.zero;
+            //rb.position = startPosition;
+            //rb.velocity = Vector2.zero;
         }
     }
 
@@ -83,7 +83,11 @@ public class Movement : MonoBehaviour
     {
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (Vector2.Angle(collision.GetContact(i).normal, Vector2.up) < 60f)
+            if (collision.GetContact(i).otherCollider.name != "Player")
+            {
+                continue;
+            }
+            if (Vector2.Angle(collision.GetContact(i).normal, Vector2.up) < 85f)
             {
                 grounded = true;
                 nextUnground = Time.time + 0.15f;

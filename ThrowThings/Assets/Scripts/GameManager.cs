@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         if (winTime >= 5f - fadeTime)
         {
             float t = 1f - ((5f - winTime) / fadeTime);
-            GUI.color = new Color(1f, 1f, 1f, Mathf.Clamp01(t * 2f));
+            GUI.color = new Color(1f, 1f, 1f, Mathf.Clamp01(t * 5f));
             GUI.DrawTexture(new Rect(-10f, -10f, Screen.width + 10f, Screen.height + 10f), blackImage, ScaleMode.StretchToFill);
         }
         else if (startTime < fadeTime)

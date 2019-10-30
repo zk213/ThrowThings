@@ -21,6 +21,9 @@ public class WaveyThing : MonoBehaviour
     [SerializeField]
     private string team = "";
 
+    [SerializeField]
+    private Vector2 spring = new Vector2(1f, 1f);
+
     private float height;
 
     public string Team => team;
@@ -107,7 +110,11 @@ public class WaveyThing : MonoBehaviour
 
         Vector2 diff = origin - top.position;
         top.velocity += diff * Time.fixedDeltaTime * top.mass * 3f;
-        top.position = Vector3.Lerp(top.position, origin, Time.fixedDeltaTime * top.mass * 0.12f);
+
+        Vector2 pos = top.position;
+        pos.x = Mathf.Lerp(pos.x, origin.x, Time.fixedDeltaTime * top.mass * 0.12f * spring.x);
+        pos.y = Mathf.Lerp(pos.y, origin.y, Time.fixedDeltaTime * top.mass * 0.12f * spring.y);
+        top.position = pos;
 
         top.angularVelocity = Mathf.Lerp(top.angularVelocity, 0f, Time.fixedDeltaTime * 1f);
         Vector2 from = (lineRenderer.GetPosition(lineRenderer.positionCount - 1) - lineRenderer.GetPosition(lineRenderer.positionCount - 2)).normalized;
