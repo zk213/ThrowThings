@@ -112,7 +112,7 @@ public class AttackPlayer : MonoBehaviour
 
         Vector2 foreceDirection = new Vector2(LeftAndRight, UpAndDown).normalized;
         bool shouldIgnore = Vector2.Angle(Vector2.down, foreceDirection) < 90;
-        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>(), shouldIgnore);
+        Finish.IgnoreCollision(bullet.GetComponent<Collider2D>());
         bullet.GetComponent<Collider2D>().enabled = true;
 
 
