@@ -8,7 +8,6 @@ public class Dropper : MonoBehaviour
 
     new GameObject[] Instant = new GameObject[5];
 
-
     [SerializeField]
     new GameObject[] Objs = new GameObject[4];
 
