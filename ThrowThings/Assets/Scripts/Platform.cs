@@ -14,6 +14,9 @@ public class Platform : MonoBehaviour
     private float aliveTime = 3f;
 
     [SerializeField]
+    private float timeOffset = 0f;
+
+    [SerializeField]
     private Transform root;
 
     private float nextRespawn;
@@ -23,6 +26,7 @@ public class Platform : MonoBehaviour
     private void Awake()
     {
         Disappear();
+        nextRespawn += timeOffset;
     }
 
     private void Appear()

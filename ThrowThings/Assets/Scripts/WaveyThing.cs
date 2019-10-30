@@ -18,8 +18,12 @@ public class WaveyThing : MonoBehaviour
     [SerializeField, Range(-1f, 1f)]
     private float balance = 0f;
 
+    [SerializeField]
+    private string team = "";
+
     private float height;
 
+    public string Team => team;
     public Collider2D[] Colliders { get; private set; } = { };
 
     public bool CloseEnoughToPlatform(Grabbable grab)
@@ -42,15 +46,45 @@ public class WaveyThing : MonoBehaviour
         return false;
     }
 
-    public void Attach(GameObject grab)
+    public void RecalculateBalance()
     {
-        Rigidbody2D rb = grab.GetComponent<Rigidbody2D>();
-        if (rb)
+        Colliders = top.GetComponentsInChildren<Collider2D>();
+        balance = 0f;
+        for (int i = 0; i < Colliders.Length; i++)
         {
-            Destroy(rb);
+            if (Colliders[i].CompareTag("Top"))
+            {
+                continue;
+            }
+
+            float distance = transform.position.x - Colliders[i].transform.position.x;
+            balance += distance;
         }
 
-        grab.transform.SetParent(top.transform);
+        balance /= Colliders.Length;
+        balance *= 0.2f;
+        balance = Mathf.Clamp(balance, -1f, 1f);
+    }
+
+    public bool Attach(GameObject grab)
+    {
+        Collider2D col = grab.GetComponentInChildren<Collider2D>();
+        if (col.bounds.max.y > top.position.y)
+        {
+            Rigidbody2D rb = grab.GetComponent<Rigidbody2D>();
+            if (rb)
+            {
+                Destroy(rb);
+            }
+
+            grab.transform.SetParent(top.transform);
+            RecalculateBalance();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void Awake()
@@ -65,17 +99,6 @@ public class WaveyThing : MonoBehaviour
         {
             return;
         }
-
-        Colliders = top.GetComponentsInChildren<Collider2D>();
-        balance = 0f;
-        for (int i = 0; i < Colliders.Length; i++)
-        {
-            balance += Colliders[i].transform.position.x;
-        }
-
-        balance /= Colliders.Length;
-        balance *= 0.2f;
-        balance = Mathf.Clamp(balance, -1f, 1f);
 
         Vector2 origin = new Vector2(bottom.position.x, bottom.position.y);
         float angle = -((balance * 20f) + 90f) + 180f;

@@ -7,8 +7,7 @@ public class StickToPlatform : MonoBehaviour
         if (collision.collider.attachedRigidbody && collision.collider.attachedRigidbody.name == "Top")
         {
             WaveyThing thing = collision.collider.GetComponentInParent<WaveyThing>();
-            thing.Attach(gameObject);
-            enabled = false;
+            enabled = !thing.Attach(gameObject);
         }
     }
 }
