@@ -826,6 +826,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3570876926859761449, guid: 29e0318bb09de464fb0209565698d63f,
         type: 3}
+    - target: {fileID: 4758634670487218348, guid: be9f6c5996238e340baf9139e90bcb8c,
+        type: 3}
+      propertyPath: Objs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3570876926859761449, guid: 29e0318bb09de464fb0209565698d63f,
+        type: 3}
+    - target: {fileID: 4758634670487218348, guid: be9f6c5996238e340baf9139e90bcb8c,
+        type: 3}
+      propertyPath: Objs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6845852073045435384, guid: a0887eea9a761f6468fa923eadc675ed,
+        type: 3}
+    - target: {fileID: 4758634670487218348, guid: be9f6c5996238e340baf9139e90bcb8c,
+        type: 3}
+      propertyPath: Objs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8399701378077499969, guid: 244cac4b38178e24a8f1639e8f89e7b2,
+        type: 3}
+    - target: {fileID: 4758634670487218348, guid: be9f6c5996238e340baf9139e90bcb8c,
+        type: 3}
+      propertyPath: Objs.Array.data[3]
+      value: 
+      objectReference: {fileID: 608951142984252864, guid: aae97f839fce40f4cb71a3b0c913ee48,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be9f6c5996238e340baf9139e90bcb8c, type: 3}
 --- !u!1001 &1447952830
@@ -1136,6 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressButton: joystick 2 button 0
   placeButton: joystick 2 button 1
+  places: 1
 --- !u!1 &1672375414
 GameObject:
   m_ObjectHideFlags: 0
