@@ -13,25 +13,28 @@ public class StickToPlatform : MonoBehaviour
             StickToPlatform stick = collision.collider.GetComponentInParent<StickToPlatform>();
             if (stick)
             {
-                if (team != stick.team)
+                if (transform.position.y < Finish.Y)
                 {
-                    Destroy(gameObject);
-                    Destroy(stick.gameObject);
-                }
-                else
-                {
-                    transform.SetParent(stick.transform);
-                    Rigidbody2D rb = GetComponent<Rigidbody2D>();
-                    if (rb)
+                    if (team != stick.team)
                     {
-                        Destroy(rb);
+                        Destroy(gameObject);
+                        Destroy(stick.gameObject);
+                    }
+                    else
+                    {
+                        transform.SetParent(stick.transform);
+                        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                        if (rb)
+                        {
+                            Destroy(rb);
+                        }
+
+                        stuck = true;
+                        Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
                     }
 
-                    stuck = true;
-                    Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
+                    return;
                 }
-                
-                return;
             }
             
             WaveyThing thing = collision.collider.GetComponentInParent<WaveyThing>();
