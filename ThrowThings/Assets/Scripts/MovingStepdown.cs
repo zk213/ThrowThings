@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphicTranslation : MonoBehaviour
+public class MovingStepdown: MonoBehaviour
 {
     // Update is called once per frame
     void Update()
@@ -13,5 +13,6 @@ public class GraphicTranslation : MonoBehaviour
             GetComponent<Animator>().SetBool("Moving", true);
         }
         GetComponent<Animator>().SetBool("Moving", false);
+        gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 }
