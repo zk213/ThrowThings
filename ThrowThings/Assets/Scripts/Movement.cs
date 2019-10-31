@@ -27,9 +27,11 @@ public class Movement : MonoBehaviour
     private bool grounded;
     private float nextUnground;
     private Vector2 startPosition;
+    private ParticleSystem system;
 
     private void Awake()
     {
+        system = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         startPosition = rb.position;
@@ -37,6 +39,9 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ParticleSystem.EmissionModule e = system.emission;
+        e.enabled = grounded && Mathf.Abs(rb.velocity.x) > 0.5f;
+
         float direction = Input.GetAxisRaw(horizontalInput);
         if (allowKeyboard)
         {
@@ -79,7 +84,7 @@ public class Movement : MonoBehaviour
         }
 
         //If velocity is over a small number, update "Moving"
-        if(Mathf.Abs(rb.velocity.x) >= 0.5)
+        if (Mathf.Abs(rb.velocity.x) >= 0.5)
         {
             GetComponent<Animator>().SetBool("Moving", true);
         }

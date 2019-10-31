@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1330194392787267391}
   - component: {fileID: 7051524448907523363}
   - component: {fileID: 3656256180694013189}
-  - component: {fileID: 6258957791046858176}
   m_Layer: 0
   m_Name: Square
   m_TagString: Top
@@ -100,25 +99,6 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.5, y: 0}
   - {x: 0.5, y: 0}
---- !u!251 &6258957791046858176
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453447138541364163}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 170
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!1 &3394154297285896465
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +331,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  isSticky: 1
   lineRenderer: {fileID: 6314331715701367021}
   bottom: {fileID: 6314331717207170464}
   top: {fileID: 7239476032499938258}

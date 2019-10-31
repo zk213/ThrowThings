@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingStepdown: MonoBehaviour
+public class MovingStepdown : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    private Rigidbody2D rb;
+    private Animator anim;
+
+    private void Awake()
     {
-        
-        if (gameObject.transform.root.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude >= 0.5)
+        rb = GetComponentInParent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (rb.velocity.magnitude >= 0.5)
         {
-            GetComponent<Animator>().SetBool("Moving", true);
+            anim.SetBool("Moving", true);
         }
-        GetComponent<Animator>().SetBool("Moving", false);
+        else
+        {
+            anim.SetBool("Moving", false);
+        }
     }
 }

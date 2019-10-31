@@ -66,7 +66,7 @@ public class Holder : MonoBehaviour
                     AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
                     attackPlayer.bullet = holdingObject.gameObject;
                     attackPlayer.enabled = true;
-                    attackPlayer.bullet.transform.SetParent(attackPlayer.target);
+                    attackPlayer.bullet.transform.SetParent(attackPlayer.grabRoot);
                     attackPlayer.bullet.transform.localPosition = Vector2.zero;
 
                     enabled = false;

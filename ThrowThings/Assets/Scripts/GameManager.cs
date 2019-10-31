@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +8,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject winScreen;
 
-    private float winTime = 0f;
-    private float startTime = 0f;
+    [SerializeField]
+    private Image shade;
+
+    [SerializeField]
+    private Text startText;
+
+    [SerializeField]
+    private AnimationCurve shadeCurve;
+
     private bool won;
-    private Texture2D blackImage;
+    private float startTime = 0f;
+    private bool starting;
+    private Canvas canvas;
 
     private void OnEnable()
     {
@@ -22,50 +29,62 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        canvas = GetComponentInChildren<Canvas>();
         startTime = -0.5f;
-        blackImage = new Texture2D(1, 1);
-        blackImage.SetPixel(0, 0, Color.black);
-        blackImage.Apply();
     }
 
     private void Update()
     {
-        if (won)
+        if (starting)
         {
-            winTime += Time.unscaledDeltaTime;
-            if (winTime >= 5f)
+            startTime += Time.deltaTime;
+            Color color = shade.color;
+            if (startTime >= 1.5f)
             {
-                SceneManager.LoadScene(0);
-                Time.timeScale = 1f;
+                color.a = Mathf.Lerp(color.a, 0f, Time.smoothDeltaTime * 5f);
+                canvas.enabled = false;
             }
+            else
+            {
+                color.a = Mathf.Lerp(color.a, 1f, Time.smoothDeltaTime * 5f);
+            }
+            shade.color = color;
         }
-
-        startTime += Time.deltaTime;
-    }
-
-    private void OnGUI()
-    {
-        float fadeTime = 1.5f;
-        if (winTime >= 5f - fadeTime)
+        else
         {
-            float t = 1f - ((5f - winTime) / fadeTime);
-            GUI.color = new Color(1f, 1f, 1f, Mathf.Clamp01(t * 5f));
-            GUI.DrawTexture(new Rect(-10f, -10f, Screen.width + 10f, Screen.height + 10f), blackImage, ScaleMode.StretchToFill);
-        }
-        else if (startTime < fadeTime)
-        {
-            float t = 1f - (startTime / fadeTime);
-            GUI.color = new Color(1f, 1f, 1f, Mathf.Clamp01(t * 2f));
-            GUI.DrawTexture(new Rect(-10f, -10f, Screen.width + 10f, Screen.height + 10f), blackImage, ScaleMode.StretchToFill);
+            float t = startTime;
+            shade.color = new Color(0f, 0f, 0f, shadeCurve.Evaluate(t));
+            startTime += Time.deltaTime;
+
+            if (startTime >= 3f)
+            {
+                startText.transform.localScale = Vector3.Lerp(startText.transform.localScale, Vector3.one, Time.smoothDeltaTime * 10f);
+                startText.color = Mathf.RoundToInt(Time.time * 3.5f) % 2 == 0 ? Color.gray : Color.white;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    starting = true;
+                    startTime = 0f;
+                }
+            }
+            else
+            {
+                startText.transform.localScale = Vector3.zero;
+            }
         }
     }
 
     public static void TeamWin(string team)
     {
+        if (instance.won)
+        {
+            return;
+        }
+
         Time.timeScale = 0.5f;
         if (instance.winScreen)
         {
-            GameObject winScreen = Instantiate(instance.winScreen);
+            Win winScreen = Instantiate(instance.winScreen).GetComponent<Win>();
+            winScreen.Initialize(team);
         }
 
         instance.won = true;

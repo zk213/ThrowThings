@@ -13,7 +13,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class AttackPlayer : MonoBehaviour
@@ -30,13 +29,13 @@ public class AttackPlayer : MonoBehaviour
     [SerializeField]
     private string FireKey = "";
 
+    public Transform grabRoot;
     public GameObject accelerationBarFill;
 
 
 
     public GameObject bullet;
     public GameObject newBullet;
-    public Transform target;
 
     public GameObject player;
 
@@ -45,20 +44,25 @@ public class AttackPlayer : MonoBehaviour
 
 
 
-
+    private LineRenderer line;
     float UpAndDown;
     float LeftAndRight;
-
-    private void Start()
-    {
-
-        target.transform.position = this.transform.position;
-    }
-
 
 
     void Awake()
     {
+        line = GetComponentInChildren<LineRenderer>();
+        line.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        line.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        line.enabled = false;
     }
 
     // Update is called once per frame
@@ -97,8 +101,9 @@ public class AttackPlayer : MonoBehaviour
 
 
 
-        target.transform.position = (Vector2)transform.position + new Vector2(LeftAndRight, UpAndDown).normalized * 1.5f;
-
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, (Vector2)transform.position + new Vector2(LeftAndRight, UpAndDown).normalized * 100f);
+        grabRoot.position = (Vector2)transform.position + new Vector2(LeftAndRight, UpAndDown).normalized * 1.8f;
 
 
 
