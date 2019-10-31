@@ -2,7 +2,7 @@
 
 public class StickToPlatform : MonoBehaviour
 {
-    public int team;
+    public string team;
     
     private bool stuck;
     
@@ -36,15 +36,15 @@ public class StickToPlatform : MonoBehaviour
                     return;
                 }
             }
-            
-            WaveyThing thing = collision.collider.GetComponentInParent<WaveyThing>();
-            if (thing)
+        }
+
+        WaveyThing thing = collision.collider.GetComponentInParent<WaveyThing>();
+        if (thing)
+        {
+            stuck = thing.Attach(gameObject);
+            if (stuck)
             {
-                stuck = thing.Attach(gameObject);
-                if (stuck)
-                {
-                    Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
-                }
+                Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
             }
         }
     }

@@ -19,11 +19,14 @@ using UnityEngine.UI;
 public class AttackPlayer : MonoBehaviour
 {
     [SerializeField]
-    private string VerticalInput;
+    private string team = "";
+
     [SerializeField]
+    private string VerticalInput;
 
-
+    [SerializeField]
     private string HorizontalInput;
+
     [SerializeField]
     private string FireKey = "";
 
@@ -111,7 +114,7 @@ public class AttackPlayer : MonoBehaviour
         bool shouldIgnore = Vector2.Angle(Vector2.down, foreceDirection) < 90;
         Finish.IgnoreCollision(bullet.GetComponent<Collider2D>(), true);
         bullet.GetComponent<Collider2D>().enabled = true;
-        bullet.GetComponent<StickToPlatform>().team = FireKey.GetHashCode();
+        bullet.GetComponent<StickToPlatform>().team = team;
 
 
         bullet.GetComponent<Grabbable>().RestoreRigidbody();
