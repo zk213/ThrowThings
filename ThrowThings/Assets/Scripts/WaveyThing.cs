@@ -6,6 +6,8 @@ public class WaveyThing : MonoBehaviour
     [SerializeField]
     private AnimationCurve curve;
 
+    public bool isSticky = true;
+
     [SerializeField]
     private LineRenderer lineRenderer;
 
