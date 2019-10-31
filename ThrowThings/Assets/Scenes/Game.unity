@@ -1801,16 +1801,6 @@ PrefabInstance:
       propertyPath: m_Positions.Array.data[15].x
       value: 6.25
       objectReference: {fileID: 0}
-    - target: {fileID: 6314331715701367018, guid: d7d1560e741f3c74c880f776789e9954,
-        type: 3}
-      propertyPath: spring.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314331715701367018, guid: d7d1560e741f3c74c880f776789e9954,
-        type: 3}
-      propertyPath: spring.x
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
       propertyPath: horizontalInput
       value: Horizontal2

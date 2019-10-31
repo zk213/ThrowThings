@@ -356,7 +356,7 @@ MonoBehaviour:
   top: {fileID: 7239476032499938258}
   balance: 0
   team: 
-  spring: {x: 0.1, y: 2}
+  spring: {x: 9, y: 9}
 --- !u!120 &6314331715701367021
 LineRenderer:
   m_ObjectHideFlags: 0

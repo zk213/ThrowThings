@@ -38,10 +38,13 @@ public class StickToPlatform : MonoBehaviour
             }
             
             WaveyThing thing = collision.collider.GetComponentInParent<WaveyThing>();
-            stuck = thing.Attach(gameObject);
-            if (stuck)
+            if (thing)
             {
-                Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
+                stuck = thing.Attach(gameObject);
+                if (stuck)
+                {
+                    Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
+                }
             }
         }
     }
