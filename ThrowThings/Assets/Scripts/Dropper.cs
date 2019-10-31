@@ -21,17 +21,17 @@ public class Dropper : MonoBehaviour
 
         if (timer >= MaxTimer)
         {
-            MaxTimer = Random.Range(3,5);
+            MaxTimer = Random.Range(3f, 5f);
 
             timer = 0;
             i++;
-            if(i >= 5)
+            if (i >= 5)
             {
                 i = 0;
             }
 
             // if Balls[i] is not null, destroy Balls[i]
-            if(Instant[i] != null)
+            if (Instant[i] != null)
             {
                 //if instant at i has been stuck, remove it from here
                 if (Instant[i].transform.parent != null)
@@ -44,8 +44,8 @@ public class Dropper : MonoBehaviour
                 }
             }
 
-            Instant[i] = Instantiate(Objs[Random.Range(0,3)], new Vector3(Random.Range(-5.5f, 5.5f),10,0), Quaternion.identity);
-            Instant[i].transform.localScale += new Vector3(Random.Range(0.7f, 1.3f), Random.Range(0.7f, 1.3f), 1);
+            Instant[i] = Instantiate(Objs[Random.Range(0, Objs.Length)], new Vector3(Random.Range(-5.5f, 5.5f), 10, 0), Quaternion.identity);
+            //Instant[i].transform.localScale += new Vector3(Random.Range(0.7f, 1.3f), Random.Range(0.7f, 1.3f), 1);
         }
     }
 }

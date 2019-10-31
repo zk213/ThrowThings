@@ -93,11 +93,14 @@ public class Movement : MonoBehaviour
     {
         for (int i = 0; i < collision.contactCount; i++)
         {
-            if (collision.GetContact(i).otherCollider.name != "Player")
+            ContactPoint2D contact = collision.GetContact(i);
+            if (contact.otherCollider.name != "Player" && !contact.otherCollider.GetComponent<Movement>())
             {
                 continue;
             }
-            if (Vector2.Angle(collision.GetContact(i).normal, Vector2.up) < 85f)
+
+            float angle = Vector2.Angle(collision.GetContact(i).normal, Vector2.up);
+            if (angle < 85f)
             {
                 grounded = true;
                 nextUnground = Time.time + 0.15f;
