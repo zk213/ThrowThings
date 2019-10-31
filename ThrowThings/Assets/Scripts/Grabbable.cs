@@ -65,11 +65,13 @@ public class Grabbable : MonoBehaviour
         Destroy(Rigidbody);
     }
 
-    public bool IsCloseEnough(Vector2 position)
+    public bool IsCloseEnough(Bounds bounds)
     {
-        Bounds bounds = Collider.bounds;
+        Bounds b = Collider.bounds;
+        b.center = new Vector3(b.center.x, b.center.y, 0f);
+        b.Expand(0.15f);
+
         bounds.center = new Vector3(bounds.center.x, bounds.center.y, 0f);
-        bounds.Expand(1.1f);
-        return bounds.Contains(position);
+        return b.Intersects(bounds);
     }
 }
