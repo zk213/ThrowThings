@@ -111,6 +111,7 @@ public class AttackPlayer : MonoBehaviour
         bool shouldIgnore = Vector2.Angle(Vector2.down, foreceDirection) < 90;
         Finish.IgnoreCollision(bullet.GetComponent<Collider2D>(), true);
         bullet.GetComponent<Collider2D>().enabled = true;
+        bullet.GetComponent<StickToPlatform>().team = FireKey.GetHashCode();
 
 
         bullet.GetComponent<Grabbable>().RestoreRigidbody();
