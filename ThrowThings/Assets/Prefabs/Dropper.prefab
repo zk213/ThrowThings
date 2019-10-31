@@ -43,7 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c50eacfffe135b1498feb55808d3e6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Obj1: {fileID: 0}
-  Obj2: {fileID: 0}
-  Obj3: {fileID: 0}
-  Obj4: {fileID: 0}
+  Objs:
+  - {fileID: 3570876926859761449, guid: 29e0318bb09de464fb0209565698d63f, type: 3}
+  - {fileID: 2756388995866883955, guid: d269b5c2096288742b4c4c81d6b752d8, type: 3}
+  - {fileID: 6845852073045435384, guid: a0887eea9a761f6468fa923eadc675ed, type: 3}
+  - {fileID: 8399701378077499969, guid: 244cac4b38178e24a8f1639e8f89e7b2, type: 3}
+  - {fileID: 608951142984252864, guid: aae97f839fce40f4cb71a3b0c913ee48, type: 3}
+  - {fileID: 8836189808484158913, guid: 281912f457db8f545a46bc3f5f2664d7, type: 3}
+  - {fileID: 2507668509424696239, guid: c576ce47658b4ab4fa580222d9406175, type: 3}
+  - {fileID: 6352318446849403703, guid: f7c6507b572fe204db211dee77435588, type: 3}
+  - {fileID: 69232508107168693, guid: 23f1244e5bd058d4cbc99b303d56c727, type: 3}
