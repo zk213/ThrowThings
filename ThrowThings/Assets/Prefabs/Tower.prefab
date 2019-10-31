@@ -500,9 +500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301bfe2d0ac4f634da6afb8c2ca0a7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accel: 8
-  speed: 5
-  gravity: 20
+  accel: 9
+  speed: 16
+  gravity: 22
   horizontalInput: Horizontal1
   verticalInput: Vertical1
   allowKeyboard: 1

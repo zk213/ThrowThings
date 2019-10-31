@@ -1809,22 +1809,6 @@ PrefabInstance:
       propertyPath: verticalInput
       value: Vertical2
       objectReference: {fileID: 0}
-    - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
-      propertyPath: speed
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
-      propertyPath: accel
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
-      propertyPath: gravity
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 400291931, guid: d7d1560e741f3c74c880f776789e9954, type: 3}
-      propertyPath: jumpHeight
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7051524448907523363, guid: d7d1560e741f3c74c880f776789e9954,
         type: 3}
       propertyPath: m_Color.r
