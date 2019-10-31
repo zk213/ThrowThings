@@ -13,6 +13,7 @@ public class Holder : MonoBehaviour
 
     private float lastHoldTime;
     private Grabbable holdingObject;
+    private Collider2D col;
     private PhysicsMaterial2D physicsMat;
     private WaveyThing[] things = { };
 
@@ -20,6 +21,7 @@ public class Holder : MonoBehaviour
     {
         things = FindObjectsOfType<WaveyThing>();
         physicsMat = GetComponentInChildren<Collider2D>().sharedMaterial;
+        col = GetComponent<Collider2D>();
 
         AttackPlayer attackPlayer = GetComponent<AttackPlayer>();
         if (attackPlayer)
@@ -32,8 +34,6 @@ public class Holder : MonoBehaviour
     {
         if (holdingObject)
         {
-
-
             lastHoldTime = Time.time;
 
             if (Input.GetKeyDown(pressButton))
@@ -83,7 +83,7 @@ public class Holder : MonoBehaviour
                 for (int i = 0; i < Grabbable.Grabbables.Count; i++)
                 {
                     Grabbable grab = Grabbable.Grabbables[i];
-                    if (grab.IsCloseEnough(transform.position))
+                    if (grab.IsCloseEnough(col.bounds))
                     {
                         Grab(grab);
                         break;
