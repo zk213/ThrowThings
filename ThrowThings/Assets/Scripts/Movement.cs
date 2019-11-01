@@ -23,6 +23,13 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float jumpHeight = 4f;
 
+    [SerializeField]
+    private AudioClip jumpSound;
+
+    [SerializeField]
+    private AudioClip waterSplash;
+
+    private AudioSource source;
     private Rigidbody2D rb;
     private bool grounded;
     private float nextUnground;
@@ -31,6 +38,7 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
+        source = GetComponentInChildren<AudioSource>();
         system = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
@@ -58,6 +66,8 @@ public class Movement : MonoBehaviour
             {
                 grounded = false;
                 rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(2f * jumpHeight * gravity));
+                source.volume = 0.3f;
+                source.PlayOneShot(jumpSound);
             }
         }
 
@@ -65,6 +75,8 @@ public class Movement : MonoBehaviour
         {
             grounded = false;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(2f * jumpHeight * gravity));
+            source.volume = 0.5f;
+            source.PlayOneShot(jumpSound);
         }
 
         Vector2 velocity = rb.velocity;
@@ -91,6 +103,14 @@ public class Movement : MonoBehaviour
         else
         {
             GetComponent<Animator>().SetBool("Moving", false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Water")
+        {
+            source.PlayOneShot(waterSplash);
         }
     }
 

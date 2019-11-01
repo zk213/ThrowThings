@@ -29,6 +29,11 @@ public class AttackPlayer : MonoBehaviour
     [SerializeField]
     private string FireKey = "";
 
+    [SerializeField]
+    private AudioClip shootSound;
+
+    private AudioSource source;
+
     public Transform grabRoot;
     public GameObject accelerationBarFill;
 
@@ -51,6 +56,7 @@ public class AttackPlayer : MonoBehaviour
 
     void Awake()
     {
+        source = GetComponentInChildren<AudioSource>();
         line = GetComponentInChildren<LineRenderer>();
         line.enabled = false;
     }
@@ -93,7 +99,7 @@ public class AttackPlayer : MonoBehaviour
             FireBullet(force);
 
             accelerationBarFill.GetComponent<Image>().fillAmount = 0;
-
+            source.PlayOneShot(shootSound);
 
         }
 

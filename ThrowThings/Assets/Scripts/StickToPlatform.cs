@@ -3,49 +3,44 @@
 public class StickToPlatform : MonoBehaviour
 {
     public string team;
-    
+
+    [SerializeField]
+    private AudioClip hitSound;
+
+    [SerializeField]
+    private AudioClip stickSound;
+
+    private AudioSource source;
     private bool stuck;
-    
+
+    private void Awake()
+    {
+        source = GetComponentInChildren<AudioSource>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (!stuck)
-        //{
-        //    StickToPlatform stick = collision.collider.GetComponentInParent<StickToPlatform>();
-        //    if (stick)
-        //    {
-        //        if (transform.position.y < Finish.Y)
-        //        {
-        //            if (team != stick.team)
-        //            {
-        //                Destroy(gameObject);
-        //                Destroy(stick.gameObject);
-        //            }
-        //            else
-        //            {
-        //                transform.SetParent(stick.transform);
-        //                Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        //                if (rb)
-        //                {
-        //                    Destroy(rb);
-        //                }
-
-        //                stuck = true;
-        //                Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
-        //            }
-
-        //            return;
-        //        }
-        //    }
-        //}
-
         WaveyThing thing = collision.collider.GetComponentInParent<WaveyThing>();
         if (thing && thing.isSticky)
         {
+            bool wasStuck = false;
             stuck = thing.Attach(gameObject);
             if (stuck)
             {
+                if (!wasStuck)
+                {
+                    source.PlayOneShot(stickSound);
+                    source.pitch = 1.25f;
+                    source.volume = 0.3f;
+                }
+
                 Finish.IgnoreCollision(GetComponent<Collider2D>(), false);
+                return;
             }
         }
+
+        source.pitch = 1f;
+        source.volume = Mathf.Clamp(collision.relativeVelocity.magnitude * 0.02f, 0.08f, 0.3f);
+        source.PlayOneShot(hitSound);
     }
 }

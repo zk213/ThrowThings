@@ -11,6 +11,10 @@ public class Holder : MonoBehaviour
     [SerializeField]
     private bool places = true;
 
+    [SerializeField]
+    private AudioClip grabSound;
+
+    private AudioSource source;
     private float lastHoldTime;
     private Grabbable holdingObject;
     private Collider2D col;
@@ -19,6 +23,7 @@ public class Holder : MonoBehaviour
 
     private void Awake()
     {
+        source = GetComponentInChildren<AudioSource>();
         things = FindObjectsOfType<WaveyThing>();
         physicsMat = GetComponentInChildren<Collider2D>().sharedMaterial;
         col = GetComponent<Collider2D>();
@@ -110,6 +115,8 @@ public class Holder : MonoBehaviour
 
     private void Grab(Grabbable grabbable)
     {
+        source.PlayOneShot(grabSound);
+
         holdingObject = grabbable;
         holdingObject.RemoveRigidbody();
         grabbable.transform.SetParent(transform);

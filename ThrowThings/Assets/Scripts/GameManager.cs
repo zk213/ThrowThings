@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private AnimationCurve shadeCurve;
 
+    private AudioSource source;
     private bool won;
     private float startTime = 0f;
     private bool starting;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        source = GetComponentInChildren<AudioSource>();
         canvas = GetComponentInChildren<Canvas>();
         startTime = -0.5f;
     }
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
             winScreen.Initialize(team);
         }
 
+        instance.source.PlayOneShot(instance.source.clip);
         instance.won = true;
     }
 }
